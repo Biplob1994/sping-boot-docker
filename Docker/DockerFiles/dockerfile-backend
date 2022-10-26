@@ -1,0 +1,24 @@
+FROM ubuntu:20.04
+
+ARG SERVER_NAME
+ARG SERVER_PORT
+ARG DB_USERNAME
+ARG DB_PASSWORD
+ARG DB_USERNAME
+ARG DB_HOST
+ARG DB_PORT
+
+ARG GIT_REPO
+ARG GIT_BRANCH
+ARG GIT_FOLDER
+
+WORKDIR /project
+
+RUN apt update; \
+    apt install openjdk-8-jdk maven git wget -y; \
+    mkdir /project; cd /project; \
+    git init; \
+    git remote add origin $GIT_REPO; \
+    git fetch branch; \
+    git checkout orgin/$GIT_BRANCH -- $GIT_FOLDER; \
+
