@@ -19,10 +19,10 @@ WORKDIR /project
 
 RUN apt update; \
     apt install openjdk-8-jdk maven git wget -y; \
-    mkdir /project; cd /project; \
+    cd /project; \
     git init; \
     git remote add origin $GIT_REPO; \
-    git fetch branch; \
+    git fetch origin; \
     git checkout origin/$GIT_BRANCH -- $GIT_FOLDER; \
 
 
