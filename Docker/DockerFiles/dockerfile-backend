@@ -37,6 +37,6 @@ RUN apt update; \
     mv ./tomcat/*/* ./tomcat; \
     cp /project/$GIT_FOLDER/target/spring-boot-data-jpa.war ./tomcat/webapps/; 
 
-
+ENTRYPOINT ["sh", "/project/tomcat/bin/catalina.sh", "run;"]
 
 EXPOSE 8080
