@@ -1,10 +1,11 @@
-FROM ubuntu:20.04
+FROM ubuntu
 
 ARG SERVER_NAME
 ARG SERVER_PORT
 ARG DB_USERNAME
 ARG DB_PASSWORD
 ARG DB_USERNAME
+ARG DB_NAME
 ARG DB_HOST
 ARG DB_PORT
 
@@ -23,6 +24,18 @@ RUN apt update; \
     git init; \
     git remote add origin $GIT_REPO; \
     git fetch origin; \
-    git checkout origin/$GIT_BRANCH -- $GIT_FOLDER; 
+    git checkout origin/$GIT_BRANCH -- $GIT_FOLDER; \
+    sed -i "s,@CrossOrigin(origins =.*,@CrossOrigin(origins = http://$SERVER_NAME:$SERVER_PORT),g" /project/app/backend/src/main/java/com/bezkoder/spring/datajpa/controller/TutorialController.java; \
+    sed -i "s,spring.datasource.url=.*,spring.datasource.url= jdbc:mysql://$DB_HOST:$DB_PORT/$DB_NAME?useSSL=false,g" /project/app/backend/src/main/resources/application.properties; \
+    sed -i "s,spring.datasource.username=.*,spring.datasource.username= $DB_USERNAME,g" /project/app/backend/src/main/resources/application.properties; \
+    sed -i "s,spring.datasource.password=.*,spring.datasource.password= $DB_PASSWORD,g" /project/app/backend/src/main/resources/application.properties; \
+    cd /project/$GIT_FOLDER; \
+    mvn clean install; \
+    cd /project; mkdir tomcat; \
+    wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.68/bin/apache-tomcat-9.0.68.tar.gz; \
+    tar -xvf tomcat.tar.gz -C tomcat; \
+    mv ./tomcat/*/* ./tomcat; \
+    cp /project/$GIT_FOLDER/target/spring-boot-data-jpa.war ./tomcat/webapp/; 
 
-
+ENTRYPOINT ["sh", "/project/tomcat/bin/catalina.sh", "start"]
+    
