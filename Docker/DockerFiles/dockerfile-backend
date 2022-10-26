@@ -23,6 +23,6 @@ RUN apt update; \
     git init; \
     git remote add origin $GIT_REPO; \
     git fetch branch; \
-    git checkout orgin/$GIT_BRANCH -- $GIT_FOLDER; \
+    git checkout origin/$GIT_BRANCH -- $GIT_FOLDER; \
 
 
