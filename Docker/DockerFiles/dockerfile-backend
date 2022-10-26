@@ -35,7 +35,7 @@ RUN apt update; \
     wget -O tomcat.tar.gz https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.68/bin/apache-tomcat-9.0.68.tar.gz; \
     tar -xvf tomcat.tar.gz -C tomcat; \
     mv ./tomcat/*/* ./tomcat; \
-    cp /project/$GIT_FOLDER/target/spring-boot-data-jpa.war ./tomcat/webapp/; 
+    cp /project/$GIT_FOLDER/target/spring-boot-data-jpa.war ./tomcat/webapps/; 
 
 ENTRYPOINT ["sh", "/project/tomcat/bin/catalina.sh", "start"]
     
