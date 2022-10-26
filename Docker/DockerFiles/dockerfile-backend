@@ -12,6 +12,9 @@ ARG GIT_REPO
 ARG GIT_BRANCH
 ARG GIT_FOLDER
 
+ENV TZ=Asia/Dhaka \
+    DEBIAN_FRONTEND=noninteractive
+
 WORKDIR /project
 
 RUN apt update; \
@@ -21,4 +24,5 @@ RUN apt update; \
     git remote add origin $GIT_REPO; \
     git fetch branch; \
     git checkout orgin/$GIT_BRANCH -- $GIT_FOLDER; \
+
 
