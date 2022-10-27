@@ -4,13 +4,13 @@ services:
   db:
     image: teamcloudboost/spring-boot:database
     ports:
-      -3306:3306
+      - 3306:3306
     container_name: spring-boot-database
     restart: unless-stopped
   backend:
     image: teamcloudboost/spring-boot:backend
     ports:
-      -8080:8080
+      - 8080:8080
     container_name: spring-boot-backend
     restart: unless-stopped
     depends_on:
