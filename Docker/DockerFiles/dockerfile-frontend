@@ -13,7 +13,7 @@ RUN apk add git npm; \
     git fetch origin; \
     git checkout origin/$REPO_BRANCH -- $REPO_FOLDER; \
     cd $REPO_FOLDER; \
-    sed -i 's,localhost,$SERVER_NAME,g' src/http-common.js; \
+    sed -i 's,localhost,'"$SERVER_NAME"',g' src/http-common.js; \
     npm install; \
     npm run build; \
     rm -rf usr/share/nginx/html/*; \
