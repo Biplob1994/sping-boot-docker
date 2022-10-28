@@ -1,10 +1,10 @@
 FROM nginx:alpine
 
 #######CONFIG START#########
-ENV SERVER_NAME=
-ENV REPO_LINK=
-ENV REPO_BRANCH=
-ENV REPO_FOLDER=
+ENV SERVER_NAME=10.8.215.16
+ENV REPO_LINK=https://github.com/Team-Cloudboost/sping-boot-docker.git
+ENV REPO_BRANCH=main
+ENV REPO_FOLDER=app/frontend
 #######CONFIG END###########
 
 WORKDIR /project

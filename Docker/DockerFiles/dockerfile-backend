@@ -8,27 +8,26 @@ FROM ubuntu
 # e.g : for port 8081 ":8081" instead of "8081"
 # Dont use port 8080 as backend running on this port
 
-ENV SERVER_NAME=a
+ENV SERVER_NAME=10.8.215.16
 ENV SERVER_PORT=
 
 ##############CORS SETUP END#############
 
 ##########DATABASE CONFIG START###########
 
-ENV DB_USERNAME=
-ENV DB_PASSWORD=
-ENV DB_USERNAME=
-ENV DB_NAME=
-ENV DB_HOST=
-ENV DB_PORT=
+ENV DB_USERNAME=java
+ENV DB_PASSWORD=java_pass
+ENV DB_NAME=javadb
+ENV DB_HOST=10.8.215.16
+ENV DB_PORT=3306
 
 ##########DATABASE CONFIG END############
 
 ##########REPOSITORY CONFIG START########
 
-ENV GIT_REPO=
-ENV GIT_BRANCH=
-ENV GIT_FOLDER=
+ENV GIT_REPO=https://github.com/Team-Cloudboost/sping-boot-docker.git
+ENV GIT_BRANCH=main
+ENV GIT_FOLDER=app/backend
 
 ##########REPOSITORY CONFIG END##########
 
@@ -44,7 +43,7 @@ RUN apt update; \
     git remote add origin $GIT_REPO; \
     git fetch origin; \
     git checkout origin/$GIT_BRANCH -- $GIT_FOLDER; \
-    sed -i 's,@CrossOrigin(origins =.*,@CrossOrigin(origins = "http://'"$SERVER_NAME"'"),g' /project/app/backend/src/main/java/com/bezkoder/spring/datajpa/controller/TutorialController.java; \
+    sed -i 's,@CrossOrigin(origins =.*,@CrossOrigin(origins = "http://'"$SERVER_NAME:$SERVER_PORT"'"),g' /project/app/backend/src/main/java/com/bezkoder/spring/datajpa/controller/TutorialController.java; \
     sed -i "s,spring.datasource.url=.*,spring.datasource.url= jdbc:mysql://$DB_HOST:$DB_PORT/$DB_NAME?useSSL=false,g" /project/app/backend/src/main/resources/application.properties; \
     sed -i "s,spring.datasource.username=.*,spring.datasource.username= $DB_USERNAME,g" /project/app/backend/src/main/resources/application.properties; \
     sed -i "s,spring.datasource.password=.*,spring.datasource.password= $DB_PASSWORD,g" /project/app/backend/src/main/resources/application.properties; \
