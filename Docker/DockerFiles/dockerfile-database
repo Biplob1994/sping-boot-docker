@@ -7,7 +7,11 @@ ENV MYSQL_USER=java
 ENV MYSQL_PASSWORD=java_pass
 ######DATBASE COFIG END####################
 
-RUN /etc/init.d/mysql start; \
+ENV TZ=Asia/Dhaka \
+    DEBIAN_FRONTEND=noninteractive
+
+RUN apt update; apt install mysql-server -y; \
+    /etc/init.d/mysql start; \
     mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '${MYSQL_ROOT_PASSWORD}';"
 
 EXPOSE 3306
