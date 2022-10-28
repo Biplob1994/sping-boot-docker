@@ -15,9 +15,9 @@ RUN apt update; apt install mysql-server -y; \
     mysql -e "CREATE DATABASE ${MYSQL_DATABASE};";\
     mysql -e "CREATE USER '${MYSQL_USER}'@'%' IDENTIFIED BY '${MYSQL_PASSWORD}';"; \
     mysql -e "GRANT ALL ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';"; \
-    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '${MYSQL_ROOT_PASSWORD}';" 
-    #sed -i "s,bind-address.*,bind-address = 0.0.0.0,g" /etc/mysql/mysql.conf.d/mysqld.cnf; 
+    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '${MYSQL_ROOT_PASSWORD}';" \
+    sed -i 's,bind-address.*,bind-address = 0.0.0.0,g' /etc/mysql/mysql.conf.d/mysqld.cnf; 
 
-ENTRYPOINT [ "/bin/sh", "-c", "/etc/init.d/mysql", "start" ]
+ENTRYPOINT [ "/bin/sh", "-c", "/etc/init.d/mysql start"]
 
 EXPOSE 3306
