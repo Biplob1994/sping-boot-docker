@@ -18,8 +18,8 @@ services:
     container_name: spring-boot-backend
     restart: unless-stopped
     depends_on:
-      db:
-        condition: service_healthy
+        db:
+          condition: service_healthy
         
   fronend:
     image: teamcloudboost/spring-boot:frontend
