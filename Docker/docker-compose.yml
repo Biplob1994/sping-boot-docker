@@ -13,7 +13,6 @@ services:
       - 8080:8080
     container_name: spring-boot-backend
     restart: unless-stopped
-    entrypoint: ["mysqld"]
     depends_on:
       - db
   fronend:
