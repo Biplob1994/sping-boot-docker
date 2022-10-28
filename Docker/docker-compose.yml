@@ -7,7 +7,6 @@ services:
       - 3306:3306
     container_name: spring-boot-database
     restart: unless-stopped
-    
   backend:
     image: teamcloudboost/spring-boot:backend
     ports:
@@ -15,13 +14,8 @@ services:
     container_name: spring-boot-backend
     restart: unless-stopped
     depends_on:
+        - fronend
         - db
-    healthcheck:
-            test: mysqladmin ping -h 127.0.0.1 -u$$MYSQL_USER --password=$$MYSQL_PASSWORD
-            timeout: 20s
-            retries: 10
-          
-        
   fronend:
     image: teamcloudboost/spring-boot:frontend
     ports:
@@ -30,7 +24,6 @@ services:
     restart: unless-stopped
     depends_on:
       - db
-      - backend
     
   
     
