@@ -1,17 +1,36 @@
 FROM ubuntu
 
-ARG SERVER_NAME
-ARG SERVER_PORT
-ARG DB_USERNAME
-ARG DB_PASSWORD
-ARG DB_USERNAME
-ARG DB_NAME
-ARG DB_HOST
-ARG DB_PORT
 
-ARG GIT_REPO
-ARG GIT_BRANCH
-ARG GIT_FOLDER
+##############CORS SETUP START#############
+# Here you have to put your Frontend Domain and Port.
+# If your frontend running on port 80 then please leave it blank
+# if your forntend running on custom port use : before the port. 
+# e.g : for port 8081 ":8081" instead of "8081"
+# Dont use port 8080 as backend running on this port
+
+ENV SERVER_NAME=a
+ENV SERVER_PORT=
+
+##############CORS SETUP END#############
+
+##########DATABASE CONFIG START###########
+
+ENV DB_USERNAME=
+ENV DB_PASSWORD=
+ENV DB_USERNAME=
+ENV DB_NAME=
+ENV DB_HOST=
+ENV DB_PORT=
+
+##########DATABASE CONFIG END############
+
+##########REPOSITORY CONFIG START########
+
+ENV GIT_REPO=
+ENV GIT_BRANCH=
+ENV GIT_FOLDER=
+
+##########REPOSITORY CONFIG END##########
 
 ENV TZ=Asia/Dhaka \
     DEBIAN_FRONTEND=noninteractive

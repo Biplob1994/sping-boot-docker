@@ -1,9 +1,12 @@
 FROM nginx:alpine
 
-ARG SERVER_NAME
-ARG REPO_LINK
-ARG REPO_BRANCH
-ARG REPO_FOLDER
+#######CONFIG START#########
+ENV SERVER_NAME=
+ENV REPO_LINK=
+ENV REPO_BRANCH=
+ENV REPO_FOLDER=
+#######CONFIG END###########
+
 WORKDIR /project
 
 RUN apk add git npm; \
@@ -18,3 +21,5 @@ RUN apk add git npm; \
     npm run build; \
     rm -rf usr/share/nginx/html/*; \
     cp -rf build/* /usr/share/nginx/html;
+
+EXPOSE 80
