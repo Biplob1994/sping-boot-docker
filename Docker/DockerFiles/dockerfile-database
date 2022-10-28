@@ -3,7 +3,7 @@ FROM mysql
 ######DATBASE COFIG START##################
 ENV MYSQL_ROOT_PASSWORD=StrongPass
 ENV MYSQL_DATABASE=javadb
-ENV MYSQL_USERNAME=java
+ENV MYSQL_USER=java
 ENV MYSQL_PASSWORD=java_pass
 ######DATBASE COFIG END####################
 
