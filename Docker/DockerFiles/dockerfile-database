@@ -7,7 +7,7 @@ ENV MYSQL_USER=java
 ENV MYSQL_PASSWORD=java_pass
 ######DATBASE COFIG END####################
 
-COPY Entrypoints/entrypoint-database.sh /
+
 
 ENV TZ=Asia/Dhaka \
     DEBIAN_FRONTEND=noninteractive
@@ -20,7 +20,7 @@ RUN apt update; apt install mysql-server -y --no-install-recommends; \
     mysql -e "GRANT ALL ON ${MYSQL_DATABASE}.* TO '${MYSQL_USER}'@'%';"; \
     mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED WITH caching_sha2_password BY '${MYSQL_ROOT_PASSWORD}';" 
     
-RUN ["chmod", "+x", "/entrypoint-database.sh"]
-ENTRYPOINT [ "sh", "/entrypoint-database.sh"]
+
+ENTRYPOINT [ "mysqld"]
 
 EXPOSE 3306

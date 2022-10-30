@@ -7,7 +7,7 @@ services:
       - 3306:3306
     container_name: spring-boot-database
     restart: unless-stopped
-    entrypoint: [ "sh", "/entrypoint-database.sh"]
+    entrypoint: [ "mysqld"]
   backend:
     image: teamcloudboost/spring-boot:backend
     ports:
