@@ -13,6 +13,7 @@ services:
         image: mysql
         ports:
             - "3306"
+        entrypoint: [ "mysqld"]
         healthcheck:
             test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-pStrongPass"]
             timeout: 20s
