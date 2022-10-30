@@ -15,7 +15,7 @@ services:
             - "3306"
         entrypoint: [ "mysqld"]
         healthcheck:
-            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-pStrongPass"]
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-ujava", "-p$$YSQL_PASSWORD"]
             timeout: 20s
             retries: 10
     
