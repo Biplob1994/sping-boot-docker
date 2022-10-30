@@ -12,7 +12,7 @@ services:
         container_name: spring-boot-database
         image: teamcloudboost/spring-boot:database
         ports:
-            - "3306"
+            - "3306:3306"
         entrypoint: [ "mysqld"]
         healthcheck:
             test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-ujava", "-p$$MYSQL_PASSWORD"]
