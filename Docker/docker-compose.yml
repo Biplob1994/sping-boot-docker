@@ -9,8 +9,8 @@ services:
             db:
                 condition: service_healthy
     db:
-        container_name: teamcloudboost/spring-boot:dataase
-        image: mysql
+        container_name: spring-boot-database
+        image: teamcloudboost/spring-boot:database
         ports:
             - "3306"
         entrypoint: [ "mysqld"]
