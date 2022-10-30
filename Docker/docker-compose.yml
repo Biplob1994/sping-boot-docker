@@ -1,30 +1,22 @@
-version: '3.3'
-
+version: "2.1"
 services:
-  db:
-    image: teamcloudboost/spring-boot:database
-    ports:
-      - 3306:3306
-    container_name: spring-boot-database
-    restart: unless-stopped
-    entrypoint: [ "mysqld"]
-  backend:
-    image: teamcloudboost/spring-boot:backend
-    ports:
-      - 8080:8080
-    container_name: spring-boot-backend
-    restart: unless-stopped
-    depends_on:
-        - fronend
-        - db
-  fronend:
-    image: teamcloudboost/spring-boot:frontend
-    ports:
-      - 80:80
-    container_name: spring-boot-frontend
-    restart: unless-stopped
-    depends_on:
-      - db
+    api:
+        image: teamcloudboost/spring-boot:backend
+        container_name: spring-boot-backend
+        ports:
+            - "8080:8080"
+        depends_on:
+            db:
+                condition: service_healthy
+    db:
+        container_name: teamcloudboost/spring-boot:dataase
+        image: mysql
+        ports:
+            - "3306"
+        healthcheck:
+            test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost", "-uroot", "-pStrongPass"]
+            timeout: 20s
+            retries: 10
     
-  
-    
+
+
