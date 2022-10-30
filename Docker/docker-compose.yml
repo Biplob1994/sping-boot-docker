@@ -5,7 +5,7 @@ services:
         container_name: spring-boot-backend
         ports:
             - "8080:8080"
-        ENTRYPOINT: ["sh", "/project/tomcat/bin/catalina.sh", "start"]
+        entrypoint: ["sh", "/project/tomcat/bin/catalina.sh", "start"]
         depends_on:
             db:
                 condition: service_healthy
