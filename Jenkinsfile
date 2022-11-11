@@ -1,18 +1,17 @@
 pipeline {
-    agent {label "ip-172-26-14-37" } 
-    environment {
-        NEXUS_VERSION = "nexus3"
-        NEXUS_PROTOCOL = "http"
-        NEXUS_URL = "http://44.204.223.239:8081//repository/nexus-maven-repo/"
-        NEXUS_REPOSITORY = "nexus-maven-repo"
-        NEXUS_CREDENTIAL_ID = "nexusCredentials"
-        HOME_DIR = "/home/application/workspace"
-    }
+    agent any
+    
     stages {
         
-        stage ('BitBucket Integration') {
+        stage ('github Integration') {
             steps {
-                checkout([$class: 'GitSCM', branches: [[name: '*/Dev_Sec_Ops_Team_1']], extensions: [], userRemoteConfigs: [[credentialsId: 'bitbucket', url: 'https://bitbucket.org/appincubators/glue/src/Dev_Sec_Ops_Team_1']]])
+                checkout([$class: 'GitSCM', 
+                branches: [[name: '*/main']],
+                doGenerateSubmoduleConfigurations: false,
+                extensions: [[$class: 'CleanCheckout']],
+                submoduleCfg: [], 
+                userRemoteConfigs: [[url: 'https://github.com/Biplob1994/sping-boot-docker.git']]])
+              sh "ls -ltr"
             }
         }  
         stage ('container stop and remove') {
@@ -23,7 +22,7 @@ pipeline {
         }    
         stage ('docker build') {
             steps {
-                sh 'cd /home/application/workspace/GlueProject/Dockerfiles && docker-compose up -d'
+                sh 'cd /home/application/workspace/sping-boot-docker/Dockerfiles && docker-compose up -d'
                 sh 'docker ps'
             }
         }
